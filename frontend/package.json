@@ -1,0 +1,21 @@
+{
+    "name": "frontend",
+    "version": "1.0.0",
+    "private": true,
+    "dependencies": {
+        "react": "^18.0.0",
+        "react-dom": "^18.0.0",
+        "axios": "^0.24.0"
+    },
+    "devDependencies": {
+        "@testing-library/jest-dom": "^5.16.4",
+        "@testing-library/react": "^12.1.2",
+        "@testing-library/user-event": "^13.1.9",
+        "jest": "^27.0.6"
+    },
+    "scripts": {
+        "start": "react-scripts start",
+        "build": "react-scripts build",
+        "test": "react-scripts test --watchAll=false"
+    }
+}
