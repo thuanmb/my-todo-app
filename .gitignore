@@ -12,3 +12,4 @@ autom4te.cache/
 
 backend/target
 .vim/
+.env

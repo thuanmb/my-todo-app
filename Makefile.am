@@ -1,6 +1,7 @@
 AUTOMAKE_OPTIONS = foreign
 
 # Variables
+ENV_FILE := .env
 BACKEND_DIR = backend
 FRONTEND_DIR = frontend
 CURRENT_MAVEN_PROFILE = dev
@@ -28,6 +29,10 @@ export PG_PORT
 export PG_USER
 export PG_PASSWORD
 export PG_DB
+
+# Load the .env file
+include $(ENV_FILE)
+export $(shell sed 's/=.*//' $(ENV_FILE))
 
 # === PSQL Commands ===
 
@@ -59,7 +64,7 @@ stop_psql:
 build_dev:
 	@echo "Building backend and frontend for development..."
 	cd $(BACKEND_DIR) && mvn clean package -P$(MAVEN_DEV_PROFILE) -Dmaven.test.skip=true
-	cd $(FRONTEND_DIR) && npm install && npm run $(NPM_BUILD_SCRIPT)
+	## cd $(FRONTEND_DIR) && npm install && npm run $(NPM_BUILD_SCRIPT)
 
 build_prod:
 	@echo "Building backend and frontend for production..."
@@ -69,13 +74,14 @@ build_prod:
 # === Start Commands ===
 
 start_dev:
-	@echo "Starting backend and frontend in development mode..."
-	cd $(BACKEND_DIR) && mvn spring-boot:run -P$(MAVEN_DEV_PROFILE) &
-	cd $(FRONTEND_DIR) && npm run $(NPM_DEV_SCRIPT)
+	@echo "Starting backend ($(MAVEN_DEV_PROFILE)) and frontend in development mode..."
+	cd $(BACKEND_DIR) && mvn spring-boot:run -P$(MAVEN_DEV_PROFILE) -Dspring-boot.run.profiles=$(MAVEN_DEV_PROFILE)
+	## cd $(BACKEND_DIR) && mvn spring-boot:run -P$(MAVEN_DEV_PROFILE) &
+	## cd $(FRONTEND_DIR) && npm run $(NPM_DEV_SCRIPT)
 
 start_prod:
 	@echo "Starting backend and frontend in production mode..."
-	cd $(BACKEND_DIR) && mvn spring-boot:run -P$(MAVEN_PROD_PROFILE) &
+	cd $(BACKEND_DIR) && mvn spring-boot:run -P$(MAVEN_PROD_PROFILE) -Dspring-boot.run.profiles=$(MAVEN_PROD_PROFILE) &
 	cd $(FRONTEND_DIR) && npm run $(NPM_DEV_SCRIPT)
 
 # === Test Commands ===

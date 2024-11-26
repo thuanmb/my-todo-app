@@ -1,2 +1,2 @@
-ALTER TABLE todo
+ALTER TABLE todos
 ADD COLUMN due_date TIMESTAMP;

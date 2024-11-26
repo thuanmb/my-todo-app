@@ -27,6 +27,9 @@ public class User {
     private LocalDateTime createdAt;
 
     // Constructor
+    public User() {
+    }
+
     public User(String username, String plainPassword) {
         this.username = username;
         this.passwordHash = hashPassword(plainPassword);
