@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { openEditModal } from "../redux/todoSlice";
+import { openEditModal } from "../../redux/todoSlice";
 import "./TodoItem.scss";
 
 const TodoItem = ({ todo }) => {

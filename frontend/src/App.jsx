@@ -1,24 +1,29 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import TodoList from "./components/TodoList";
-import TodoEditModal from "./components/TodoEditModal";
-import { fetchTodos } from "./redux/todoSlice";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+
+import LoginPage from "./pages/LoginPage";
+import TodosPage from "./pages/TodosPage";
+
+import PrivateRoute from "./components/PrivateRoute";
+
 import "./App.scss";
 
 const App = () => {
-	const dispatch = useDispatch();
-	const todos = useSelector((state) => state.todos);
-
-	useEffect(() => {
-		dispatch(fetchTodos());
-	}, [dispatch]);
-
 	return (
-		<div className="app">
-			<h1>TODO App</h1>
-			<TodoList todos={todos.items} />
-			<TodoEditModal />
-		</div>
+		<Router>
+			<Routes>
+				<Route path="/" element={<Navigate to="/login" />} />
+				<Route path="/login" element={<LoginPage />} />
+				<Route
+					path="/todos"
+					element={
+						<PrivateRoute>
+							<TodosPage />
+						</PrivateRoute>
+					}
+				/>
+			</Routes>
+		</Router>
 	);
 };
 

@@ -15,3 +15,15 @@ export const fetchTodosApi = async () => {
 export const updateTodo = async (todo) => {
 	console.log("API Call to update TODO:", todo);
 };
+
+export const loginApi = async ({ username, password }) => {
+	return new Promise((resolve) => {
+		setTimeout(() => {
+			if (username === "admin" && password === "password") {
+				resolve({ success: true, user: { id: 1, name: "Admin" } });
+			} else {
+				resolve({ success: false });
+			}
+		}, 1000);
+	});
+};

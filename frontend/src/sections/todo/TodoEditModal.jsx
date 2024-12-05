@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateTodo, closeEditModal } from "../redux/todoSlice";
+import { updateTodo, closeEditModal } from "../../redux/todoSlice";
 
 const TodoEditModal = () => {
 	const { isOpen, currentTodo } = useSelector((state) => state.todos.editModal);
