@@ -1,8 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
+import MainLayout from "../layout/MainLayout";
 import TodoList from "../sections/todo/TodoList";
 import TodoEditModal from "../sections/todo/TodoEditModal";
+
 import { fetchTodos } from "../redux/todoSlice";
 
 const TodosPage = () => {
@@ -14,11 +16,10 @@ const TodosPage = () => {
 	}, [dispatch]);
 
 	return (
-		<div className="app">
-			<h1>TODO App</h1>
+		<MainLayout>
 			<TodoList todos={todos.items} />
 			<TodoEditModal />
-		</div>
+		</MainLayout>
 	);
 };
 

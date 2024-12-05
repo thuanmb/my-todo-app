@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogTitle from '@mui/material/DialogTitle';
 import { updateTodo, closeEditModal } from "../../redux/todoSlice";
 
 const TodoEditModal = () => {
@@ -23,15 +29,54 @@ const TodoEditModal = () => {
 		dispatch(closeEditModal());
 	};
 
+	const handleClose = () => {
+		dispatch(closeEditModal());
+	};
+
 	return (
-		<div className="edit-modal">
-			<div className="modal-content"></div>
-			<h2>Edit TODO</h2>
-			<input type="text" value={title} onChange={(e) => setTitle(e.target.value)} placeholder="Title" />
-			<textarea value={description} onChange={(e) => setDescription(e.target.value)} placeholder="Description" />
-			<button onClick={handleSave}>Save</button>
-			<button onClick={() => dispatch(closeEditModal())}>Cancel</button>
-		</div>
+			<Dialog
+        open={isOpen}
+        onClose={handleClose}
+        PaperProps={{
+          component: 'form',
+          onSubmit: handleSave,
+        }}
+      >
+        <DialogTitle>Edit TODO</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            required
+            margin="dense"
+            id="title"
+            name="title"
+            label="Title"
+            type="text"
+            fullWidth
+            variant="standard"
+						value={title}
+						onChange={(e) => setTitle(e.target.value)}
+          />
+          <TextField
+						multiline
+            autoFocus
+            required
+            margin="dense"
+            id="description"
+            name="description"
+            label="Description"
+            type="text"
+            fullWidth
+            variant="standard"
+						value={description}
+						onChange={(e) => setDescription(e.target.value)}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button type="submit">Save</Button>
+        </DialogActions>
+      </Dialog>
 	);
 };
 
