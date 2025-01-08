@@ -229,19 +229,19 @@ TODO:
 
 ### API Design
 
--   POST /v0/users/create - create new user
--   POST /v0/users/signin - sign in
--   POST /v0/users/signout - sign out
+-   POST /api/v0/users/create - create new user
+-   POST /api/v0/auth/login - sign in
+-   POST /api/v0/auth/logout - sign out
 
--   POST /v0/todos/user/{userId} - create new TODO
--   GET /v0/todos/user/{userId} - get TODO list
--   UPDATE /v0/todos/user/{userId} - update a TODO
--   DELETE /v0/todos/user/{userId} - delete a TODO
+-   POST /api/v0/todos/user/{userId} - create new TODO
+-   GET /api/v0/todos/user/{userId} - get TODO list
+-   UPDATE /api/v0/todos/user/{userId} - update a TODO
+-   DELETE /api/v0/todos/user/{userId} - delete a TODO
 
--   GET /v0/todo_categories - get TODO categories list
--   POST /v0/todo_categories - create new TODO category
--   UPDATE /v0/todo_categories - update a TODO category
--   DELETE /v0/todo_categories - delete a TODO category
+-   GET /api/v0/todo_categories - get TODO categories list
+-   POST /api/v0/todo_categories - create new TODO category
+-   UPDATE /api/v0/todo_categories - update a TODO category
+-   DELETE /api/v0/todo_categories - delete a TODO category
 
 -   POST /v0/tokens/renew - renew a token
 

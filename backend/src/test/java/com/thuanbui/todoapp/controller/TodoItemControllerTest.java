@@ -18,7 +18,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class TodoControllerTest {
+public class TodoItemControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -59,7 +59,7 @@ public class TodoControllerTest {
 
     @Test
     public void testGetTodosWhenUserHasTodos() throws Exception {
-        mockMvc.perform(get("/v0/todos/user/1"))
+        mockMvc.perform(get("/api/v0/todos/user/1"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$.error").isEmpty())
@@ -74,7 +74,7 @@ public class TodoControllerTest {
 
     @Test
     public void testGetTodosWhenUserNotFound() throws Exception {
-        mockMvc.perform(get("/v0/todos/user/123"))
+        mockMvc.perform(get("/api/v0/todos/user/123"))
                 .andExpect(status().isNotFound())
                 .andExpect(content().contentType("application/json"))
                 .andExpect(jsonPath("$.error").value("User with ID 123 not found."))

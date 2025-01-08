@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v0/todos")
+@RequestMapping("/api/v0/todos")
 public class TodoItemController {
     @Autowired
     private TodoItemRepository todoItemRepository;

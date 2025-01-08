@@ -23,8 +23,17 @@ public class User {
     private String passwordHash;
     private static final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    @Column(name = "created_at", nullable = true, updatable = false)
+    @Column(name = "created_at", nullable = true, insertable = false, updatable = false)
     private LocalDateTime createdAt;
+
+    @Column(name = "updated_at", nullable = true, insertable = false, updatable = false)
+    private LocalDateTime updatedAt;
+
+    @Column(name = "active", nullable = false, insertable = false)
+    private boolean active;
+
+    @Column(name = "deleted", nullable = false, insertable = false)
+    private boolean deleted;
 
     // Constructor
     public User() {
@@ -44,11 +53,11 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
+    public String getUsername() {
         return this.username;
     }
 
-    public void setUserName(String username) {
+    public void setUsername(String username) {
         this.username = username;
     }
 
@@ -80,6 +89,30 @@ public class User {
         this.createdAt = createdAt;
     }
 
+    public LocalDateTime getUpdatedAt() {
+        return this.updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public boolean getActive() {
+        return this.active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
+    }
+
+    public boolean getDeleted() {
+        return this.deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
@@ -98,9 +131,12 @@ public class User {
     @Override
     public String toString() {
         return String.format(
-                "User{id=%d, username='%s', created_at=%s}",
+                "User{id=%d, username='%s', created_at=%s, updated_at=%s, active=%b, deleted=%b}",
                 this.id,
                 this.username,
-                this.createdAt);
+                this.createdAt,
+                this.updatedAt,
+                this.active,
+                this.deleted);
     }
 }

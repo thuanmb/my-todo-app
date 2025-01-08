@@ -1,6 +1,6 @@
 CREATE TABLE users (
     id BIGSERIAL PRIMARY KEY,
-    username VARCHAR(320) UNIQUE NOT NULL,
+    username VARCHAR(320) NOT NULL,
     password VARCHAR(255) NOT NULL,
     active BOOLEAN NOT NULL DEFAULT TRUE,
     deleted BOOLEAN NOT NULL DEFAULT FALSE,
@@ -10,7 +10,7 @@ CREATE TABLE users (
 
 CREATE TABLE roles (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(50) UNIQUE NOT NULL,
+    name VARCHAR(50) NOT NULL,
     description VARCHAR(255) NOT NULL,
     active BOOLEAN NOT NULL DEFAULT TRUE,
     deleted BOOLEAN NOT NULL DEFAULT FALSE,
@@ -20,7 +20,7 @@ CREATE TABLE roles (
 
 CREATE TABLE permissions (
     id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(50) UNIQUE NOT NULL,
+    name VARCHAR(50) NOT NULL,
     description VARCHAR(255) NOT NULL,
     active BOOLEAN NOT NULL DEFAULT TRUE,
     deleted BOOLEAN NOT NULL DEFAULT FALSE,
@@ -43,3 +43,15 @@ CREATE TABLE IF NOT EXISTS role_permission (
     CONSTRAINT fk_role FOREIGN KEY (role_id) REFERENCES roles(id) ON DELETE CASCADE,
     CONSTRAINT fk_user FOREIGN KEY (permission_id) REFERENCES permissions(id) ON DELETE CASCADE
 );
+
+CREATE UNIQUE INDEX unique_username_active
+ON users (username)
+WHERE deleted = FALSE;
+
+CREATE UNIQUE INDEX unique_role_name_active
+ON roles (name)
+WHERE deleted = FALSE;
+
+CREATE UNIQUE INDEX unique_permission_name_active
+ON permissions (name)
+WHERE deleted = FALSE;
